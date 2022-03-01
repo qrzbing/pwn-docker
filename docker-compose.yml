@@ -3,6 +3,7 @@ services:
     pwn:
         container_name: pwn_test
         image: qrzbing/pwndocker
+        privileged: true
         cap_add:
             - SYS_PTRACE
         ports:

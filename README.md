@@ -13,7 +13,8 @@ Difference:
 	ln -s /glibc/2.26/64/lib/ld-2.26.so /lib64/ld-glibc-2.26
 	python change_ld.py -b <binary> -l <ld_version> -o <new_binary>
 	```
-
+- Add IDA 7.5 debug server for linux
+- Update pwntools to 4.8.0b0, solve the problem ["Waiting for debugger"](https://github.com/Gallopsled/pwntools/issues/1984)
 
 =========
 

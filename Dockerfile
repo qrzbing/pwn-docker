@@ -1,6 +1,13 @@
 FROM skysider/pwndocker:latest
 LABEL maintainer="qrzbing <qrzbing@gmail.com>"
 
+RUN apt -y install zsh && \
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
+    chsh -s $(which zsh) && \
+    sed -i "11c ZSH_THEME=\"ys\"" ~/.zshrc && \
+    git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
+    sed -i "73c plugins=(git zsh-autosuggestions)" ~/.zshrc
+
 COPY --from=skysider/glibc_builder64:2.26 /glibc/2.26/64 /glibc/2.26/64
 COPY --from=skysider/glibc_builder32:2.26 /glibc/2.26/32 /glibc/2.26/32
 

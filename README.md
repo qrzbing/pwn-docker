@@ -16,6 +16,18 @@ Difference:
 - Add IDA 7.5 debug server for linux
 - Update pwntools to 4.8.0b0, solve the problem ["Waiting for debugger"](https://github.com/Gallopsled/pwntools/issues/1984)
 
+<!-- 
+Some useful command:
+
+``` bash
+# kill alarm
+sed -i s/alarm/isnan/g [elf name]
+
+# disable ASLR (outside docker)
+sudo echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
+```
+ -->
+
 -----
 
 A docker environment for pwn in ctf based on **phusion/baseimage:master-amd64**, which is a modified ubuntu 20.04 baseimage for docker
@@ -23,7 +35,7 @@ A docker environment for pwn in ctf based on **phusion/baseimage:master-amd64**,
 ### Usage
 
 	docker-compose up -d
-	docker exec -it pwn_test /bin/bash
+	docker exec -it pwn_test /bin/zsh
 
 
 ### included software

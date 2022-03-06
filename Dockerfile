@@ -29,6 +29,6 @@ RUN python3 -m pip install --no-cache-dir autopep8 && \
     ln -s /glibc/2.31/64/lib/ld-2.31.so /lib64/ld-glibc-2.31
 
 COPY ./ida75/linux_server ./ida75/linux_server64 /ctf/ida75/
-RUN chmod a+x /ctf/ida75/linux_server /ctf/ida75/linux_server64
+RUN chmod a+x /ctf/ida75/linux_server /ctf/ida75/linux_server64 /ctf/work/change_ld.py
 
 CMD ["/sbin/my_init"]

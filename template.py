@@ -5,15 +5,57 @@ libc path: /glibc/2.xx/64/lib/libc-2.xx.so
 libc-database: /libc-database/
 """
 
-io = process('./<bin>')
-# io = remote('xxxxx', 12345)
+context.log_level = "DEBUG"
+context.terminal = ['tmux', 'splitw', '-h']
+context.update(arch='amd64', os='linux')    # arch='i386'
+env = {'LD_PRELOAD': ''}
+
+binary = './<bin>'
+elf = ELF(binary)
 libc = ELF('/glibc/2.28/64/lib/libc-2.28.so')
 
-# context.log_level = "DEBUG"
-# context.terminal = ['tmux', 'splitw', '-h']
-# context.update(arch='amd64|i386', os='linux')
+local = False
+if len(sys.argv) == 1:
+    local = True
+    io = process(binary)
+else:
+    io = remote(sys.argv[1], sys.argv[2])
+
+
+def s(a): return io.send(a)
+def r(a): return io.recv(a)
+def ia(): return io.interactive()
+def rl(): return io.recvline()
+def ru(a): return io.recvuntil(a)
+def sl(a): return io.sendline(a)
+def sa(a, b): return io.sendafter(a, b)
+def st(a, b): return io.sendthen(a, b)
+def sla(a, b): return io.sendlineafter(a, b)
+def slt(a, b): return io.sendlinethen(a, b)
+def info_addr(a, b): return log.info("{} addr: {}".format(a, hex(b)))
+
+
+def p(): pause()
+
+
+def g(b=''):
+    if local:
+        if b == '':
+            gdb.attach(io)
+        else:
+            gdb.attach(io, '{}'.format(b))
+
+
+def one_gadget(filename):
+    log.progress('Leak One_Gadgets...')
+    one_ggs = str(subprocess.check_output(
+        ['one_gadget', '--raw', '-f', filename]
+    )).split(' ')
+    return list(map(int, one_ggs))
+
 
 if __name__ == '__main__':
+    g()
     pass
 
 # shellcode = shellcraft.sh()

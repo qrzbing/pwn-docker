@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from pwn import *
 
 """
@@ -22,6 +24,7 @@ else:
     io = remote(sys.argv[1], sys.argv[2])
 
 
+def p(): pause()
 def s(a): return io.send(a)
 def r(a): return io.recv(a)
 def ia(): return io.interactive()
@@ -35,15 +38,9 @@ def slt(a, b): return io.sendlinethen(a, b)
 def info_addr(a, b): return log.info("{} addr: {}".format(a, hex(b)))
 
 
-def p(): pause()
-
-
 def g(b=''):
     if local:
-        if b == '':
-            gdb.attach(io)
-        else:
-            gdb.attach(io, '{}'.format(b))
+        gdb.attach(io) if b == '' else gdb.attach(io, '{}'.format(b))
 
 
 def one_gadget(filename):

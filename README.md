@@ -4,6 +4,11 @@
 
 A personal modification based on [skysider/pwndocker](https://github.com/skysider/pwndocker)
 
+### Usage
+
+	docker-compose up -d
+	docker exec -it pwn_test /bin/zsh
+
 Difference:
 
 - Add glibc-2.26  —— a tcache-vulnerable glibc version
@@ -33,11 +38,6 @@ sudo echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
 Pwndocker
 =========
 A docker environment for pwn in ctf based on **phusion/baseimage:master-amd64**, which is a modified ubuntu 20.04 baseimage for docker
-
-### Usage
-
-	docker-compose up -d
-	docker exec -it pwn_test /bin/bash
 
 
 ### included software

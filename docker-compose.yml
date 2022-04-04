@@ -8,3 +8,5 @@ services:
             - SYS_PTRACE
         ports:
             - "23946:23946"
+        # volumes:
+        #     - <YOUR_PATH_TO_WORKS>/CTF:/ctf/work/CTF

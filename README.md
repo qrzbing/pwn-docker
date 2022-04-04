@@ -14,7 +14,7 @@ Difference:
 	python change_ld.py -b <binary> -l <ld_version> -o <new_binary>
 	```
 - Add IDA 7.5 debug server for linux
-- Update pwntools to 4.8.0b0, solve the problem ["Waiting for debugger"](https://github.com/Gallopsled/pwntools/issues/1984)
+- Add zsh, proxychains4: some personal usage
 
 <!-- 
 Some useful command:
@@ -30,12 +30,14 @@ sudo echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
 
 -----
 
+Pwndocker
+=========
 A docker environment for pwn in ctf based on **phusion/baseimage:master-amd64**, which is a modified ubuntu 20.04 baseimage for docker
 
 ### Usage
 
 	docker-compose up -d
-	docker exec -it pwn_test /bin/zsh
+	docker exec -it pwn_test /bin/bash
 
 
 ### included software
@@ -121,6 +123,9 @@ root@pwn:/ctf/work# /glibc/2.28/64/ld-2.28.so /bin/ls -l /
 ```
 
 ### ChangeLog
+
+#### 2022-03-06
+add `pwntools_version` docker build argument, `4.8.0b0` is set in repo docker build actions
 
 #### 2022-2-10
 add docker-compose.yml

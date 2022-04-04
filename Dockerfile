@@ -1,7 +1,7 @@
 FROM skysider/pwndocker:latest
 LABEL maintainer="qrzbing <qrzbing@gmail.com>"
 
-RUN apt -y install zsh && \
+RUN apt -y install zsh proxychains4 && \
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
     chsh -s $(which zsh) && \
     sed -i "11c ZSH_THEME=\"ys\"" ~/.zshrc && \
@@ -10,12 +10,13 @@ RUN apt -y install zsh && \
     git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/plugins/zsh-autosuggestions && \
     sed -i "73c plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-completions)" ~/.zshrc && \
     git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime && \
-    sh ~/.vim_runtime/install_awesome_vimrc.sh
+    sh ~/.vim_runtime/install_awesome_vimrc.sh \
+    echo "alias pc='proxychains4 -q -f ~/proxychains4.conf'" >> /root/.zshrc
 
 COPY --from=skysider/glibc_builder64:2.26 /glibc/2.26/64 /glibc/2.26/64
 COPY --from=skysider/glibc_builder32:2.26 /glibc/2.26/32 /glibc/2.26/32
 
-COPY ./.tmux.conf /root/
+COPY ./proxychains4.conf ./.tmux.conf /root/
 COPY ./change_ld.py ./template.py /ctf/work/
 COPY ./ida75/linux_server ./ida75/linux_server64 /ctf/ida75/
 

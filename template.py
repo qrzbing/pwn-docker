@@ -24,12 +24,12 @@ else:
     io = remote(sys.argv[1], sys.argv[2])
 
 
-def p(): pause()
+def p(n=None): pause(n=n)
 def s(a): return io.send(a)
-def r(a): return io.recv(a)
+def r(a, numb = None): return io.recv(a, numb=numb)
 def ia(): return io.interactive()
-def rl(): return io.recvline()
-def ru(a): return io.recvuntil(a)
+def rl(keepends=True): return io.recvline(keepends=keepends)
+def ru(a, drop=False): return io.recvuntil(a, drop=drop)
 def sl(a): return io.sendline(a)
 def sa(a, b): return io.sendafter(a, b)
 def st(a, b): return io.sendthen(a, b)

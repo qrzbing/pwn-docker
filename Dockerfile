@@ -16,6 +16,10 @@ RUN apt -y install zsh proxychains4 && \
 COPY --from=skysider/glibc_builder64:2.26 /glibc/2.26/64 /glibc/2.26/64
 COPY --from=skysider/glibc_builder32:2.26 /glibc/2.26/32 /glibc/2.26/32
 
+COPY --from=qrzbing/glibc_builder64:2.32 /glibc/2.32/64 /glibc/2.32/64
+
+COPY --from=qrzbing/glibc_builder64:2.34 /glibc/2.34/64 /glibc/2.34/64
+
 COPY ./proxychains4.conf ./.tmux.conf /root/
 COPY ./change_ld.py ./template.py /ctf/work/
 COPY ./ida75/linux_server ./ida75/linux_server64 /ctf/ida75/
@@ -30,6 +34,9 @@ RUN python3 -m pip install --no-cache-dir autopep8 && \
     ln -s /glibc/2.29/64/lib/ld-2.29.so /lib64/ld-glibc-2.29 && \
     ln -s /glibc/2.30/64/lib/ld-2.30.so /lib64/ld-glibc-2.30 && \
     ln -s /glibc/2.31/64/lib/ld-2.31.so /lib64/ld-glibc-2.31 && \
+    ln -s /glibc/2.32/64/lib/ld-2.32.so /lib64/ld-glibc-2.32 && \
+    ln -s /glibc/2.34/64/lib/ld-2.34.so /lib64/ld-glibc-2.34 && \
+    ln -s /usr/bin/python3 /usr/bin/python && \
     chmod a+x /ctf/ida75/linux_server /ctf/ida75/linux_server64 /ctf/work/change_ld.py
 
 CMD ["/sbin/my_init"]

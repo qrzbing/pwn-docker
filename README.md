@@ -4,14 +4,21 @@
 
 A personal modification based on [skysider/pwndocker](https://github.com/skysider/pwndocker)
 
+Support glibc version: 2.23, 2.26-2.32, 2.34
+
 ### Usage
 
-	docker-compose up -d
-	docker exec -it pwn_test /bin/zsh
+```
+wget -O docker-compose.yml https://raw.githubusercontent.com/qrzbing/pwn-docker/master/docker-compose.yml
+docker-compose up -d
+docker exec -it pwn_test /bin/zsh
+# once finished
+docker-compose down -v
+```
 
 Difference:
 
-- Add glibc-2.26  —— a tcache-vulnerable glibc version
+- Add some newer version of glibc
 - Add a patch-ld script from [firmianay/ctf-book](https://github.com/firmianay/ctf-book/blob/main/chapter5/5.1_change_ld.py) and fix a small bug for python3
   - usage:
     ``` bash

@@ -16,7 +16,7 @@ RUN apt -y install zsh proxychains4 && \
 COPY --from=skysider/glibc_builder64:2.26 /glibc/2.26/64 /glibc/2.26/64
 COPY --from=skysider/glibc_builder32:2.26 /glibc/2.26/32 /glibc/2.26/32
 
-COPY --from=qrzbing/glibc_builder64:2.31 /glibc/2.31/64 /glibc/2.31/64
+# COPY --from=qrzbing/glibc_builder64:2.31 /glibc/2.31/64 /glibc/2.31/64
 COPY --from=qrzbing/glibc_builder64:2.32 /glibc/2.32/64 /glibc/2.32/64
 
 COPY --from=qrzbing/glibc_builder64:2.34 /glibc/2.34/64 /glibc/2.34/64
@@ -34,7 +34,7 @@ RUN python3 -m pip install --no-cache-dir autopep8 && \
     ln -s /glibc/2.28/64/lib/ld-2.28.so /lib64/ld-glibc-2.28 && \
     ln -s /glibc/2.29/64/lib/ld-2.29.so /lib64/ld-glibc-2.29 && \
     ln -s /glibc/2.30/64/lib/ld-2.30.so /lib64/ld-glibc-2.30 && \
-    ln -s /glibc/2.31/64/lib/ld-2.31.so /lib64/ld-glibc-2.31 && \
+    ln -s /lib/x86_64-linux-gnu/ld-2.31.so /lib64/ld-glibc-2.31 && \
     ln -s /glibc/2.32/64/lib/ld-2.32.so /lib64/ld-glibc-2.32 && \
     ln -s /glibc/2.34/64/lib/ld-linux-x86-64.so.2 /lib64/ld-glibc-2.34 && \
     ln -s /usr/bin/python3 /usr/bin/python && \
